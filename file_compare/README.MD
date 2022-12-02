@@ -16,9 +16,9 @@ python3 -m venv autovenv
 
 source autovenv/bin/activate
 
-pip install -r requirement.txt
+pip install -r libraries.txt
 
 
 
 
-Usage: pytest code/test_compare.py -m
+Usage: pytest test_compare.py -m
