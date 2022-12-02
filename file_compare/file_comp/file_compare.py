@@ -12,12 +12,11 @@ out_diff = []
 file_name_1 = ""
 file_name_2 = ""
 
-##primary_key = "skcatalystid"
 is_file_created = False
 
-logging.basicConfig(filename='logs.log',
-            filemode='w',
-            level=logging.DEBUG)
+# logging.basicConfig(filename='logs.log',
+#             filemode='w',
+#             level=logging.DEBUG)
 
 # Fetch the path of the given file
 def path_file(folder, file_name):
@@ -50,6 +49,9 @@ def validate_csv(file_name_1, file_name_2, env, env_1, is_excel_output):
         ##print(env)
         ##print(env_1)
         ##print(is_excel_output)
+        print("1")
+        logging.info("test")
+        
         validate_result = "Match"
         global tota_diff
         tota_diff = 0
