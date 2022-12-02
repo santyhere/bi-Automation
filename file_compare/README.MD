@@ -2,7 +2,9 @@ A. python framework to compare the common files between 2 local or S3 folders
 
 File formats supported
 * csv (v1.0)
-* xlsx (v1.1)
+* xlsx (v1.1) - In progress
+
+
 
 Additional features:
 -- Detailed output with error records (Parameterized)
@@ -10,9 +12,9 @@ Additional features:
 
 code usage:
 -----------
-python3 -m venv venv
+python3 -m venv autovenv
 
-source venv/bin/activate
+source autovenv/bin/activate
 
 pip install -r requirement.txt
 

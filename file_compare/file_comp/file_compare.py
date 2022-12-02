@@ -4,7 +4,8 @@ import numpy as np
 from time import strftime
 import os
 import openpyxl
-import logging
+from pathlib import Path
+#import logging
 
 encoding = 'unicode_escape'
 
@@ -50,7 +51,7 @@ def validate_csv(file_name_1, file_name_2, env, env_1, is_excel_output):
         ##print(env_1)
         ##print(is_excel_output)
         print("1")
-        logging.info("test")
+#        logging.info("test")
         
         validate_result = "Match"
         global tota_diff
@@ -350,11 +351,15 @@ def validate_csv(file_name_1, file_name_2, env, env_1, is_excel_output):
         print(
             "XXXXXXXXXXXXXOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
 
+        print(file_name_1)
+        print(file_name_2)
+        print(Path(file_name_1).name)
+
         file_output_path = ''
         if is_excel_output == "yes":
             if(tota_diff>0):
                 # Create the excel file for push all the mismatch records
-                file_output_path = "out_" + file_name_1 + "__" + file_name_2 + "_" + strftime(
+                file_output_path = "Diff_Details_for_" +Path(file_name_1).name+ "_" + strftime(
                     "%Y-%m-%d-%I_%M_%S" + ".xlsx")
                 wb = openpyxl.Workbook()
                 wb.save(path_file("results", file_output_path))
@@ -402,7 +407,7 @@ def validate_csv(file_name_1, file_name_2, env, env_1, is_excel_output):
         # else:
         #     len_not_existing_catal_id_older = len(not_existing_catal_id_older)
 
-        output_file_name = "output_for_version_" + env + "_" + file_name_1 + "__" + env_1+ "__" + file_name_2 + "_" + strftime(
+        output_file_name = "Summary_for_filename_" +  Path(file_name_1).name + "_" + strftime(
             "%Y-%m-%d-%I_%M_%S" + ".html")
         print(output_file_name)
 

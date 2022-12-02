@@ -13,9 +13,9 @@ env = ""
 env_1 = ""
 is_excel_output_needed = ""
 
-def load_config(config):
+#def load_config(config):
     
-    return 
+#    return 
     
     
 # Fetch the path of the given file
@@ -28,7 +28,7 @@ def path_file(folder, file_name):
 @pytest.mark.file_comparision
 def test_compare_files():
     # read config file
-    config_parsed = cp.config_parser('config.ini')
+    config_parsed = cp.config_parser('../config.ini')
     print (config_parsed)
     
     lhs_local_path = config_parsed.get('lhs_local_path')
@@ -65,7 +65,7 @@ def test_compare_files():
     print(rhs_alone_files)
 
     dt = datetime.datetime.now()
-    formatted_dt = "Comparision Summary_" + dt.strftime("%Y")+dt.strftime("%m")+dt.strftime("%d")+"_"+dt.strftime("%H")+"_"+dt.strftime("%M")+"_"+dt.strftime("%S")+".html"
+    formatted_dt = "Overall_Comparision_Summary_" + dt.strftime("%Y")+dt.strftime("%m")+dt.strftime("%d")+"_"+dt.strftime("%H")+"_"+dt.strftime("%M")+"_"+dt.strftime("%S")+".html"
     print (formatted_dt)
 
     with open(path_file("results", formatted_dt), 'w') as file:
