@@ -28,9 +28,7 @@ pip install * -f ./ --no-index
 code usage:
 -----------
 python3 -m venv autovenv
-
 source autovenv/bin/activate
-
 pip install -r libraries.txt
 
 
