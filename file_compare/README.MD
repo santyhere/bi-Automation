@@ -10,6 +10,21 @@ Additional features:
 -- Detailed output with error records (Parameterized)
 -- logging
 
+Packages:
+--------
+-- to download the packages from machine which has internet
+mkdir dependencies
+pip download -r libraries.txt -d "./dependencies"
+tar cvfz dependencies.tar.gz dependencies
+
+And, once you transfer the dependencies.tar.gz to the machine which does not have internet you would do:
+----------------------------
+tar zxvf dependencies.tar.gz
+cd dependencies
+pip install * -f ./ --no-index
+
+-----------------------------
+
 code usage:
 -----------
 python3 -m venv autovenv
