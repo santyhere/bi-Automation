@@ -1,0 +1,33 @@
+Metadata-Version: 2.1
+Name: PyColored
+Version: 1.0.2
+Summary: Awesome Python package that allows you to format and color your text!
+Home-page: https://github.com/MrHedryX/PyColored
+Author: Patrik Repan
+Author-email: repan.patrik.dev@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+
+# PyColored
+
+Awesome Python package that allows you to format and color your text!
+
+## Installation
+
+To install PyColored, simply download it using pip.
+
+```
+pip install PyColored
+```
+
+
+## Documentation
+
+For the documentation please visit our wiki. (currently WIP)
+
+
+

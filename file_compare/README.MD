@@ -34,4 +34,4 @@ pip install -r libraries.txt
 
 
 
-Usage: pytest test_compare.py -m
+Usage:~/file_comp>pytest test_compare.py -s

@@ -1,0 +1,3 @@
+[pytest11]
+logging = pytest_logging.plugin
+

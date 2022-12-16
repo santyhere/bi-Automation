@@ -41,16 +41,15 @@ def split_version_file(file_name):
     # f =  str(file_name).split("master")[1].split(".csv")[0].replace("_", "")
     return j
 
-
 # #print the catal id not exists
-def validate_csv(file_name_1, file_name_2, env, env_1, is_excel_output):
+def validate_files(file_format,file_name_1, file_name_2, env, env_1, is_excel_output):
     try:
         ##print(file_name_1)
         ##print(file_name_2)
         ##print(env)
         ##print(env_1)
         ##print(is_excel_output)
-        print("1")
+        print("format:->"+file_format)
 #        logging.info("test")
         
         validate_result = "Match"
@@ -64,19 +63,29 @@ def validate_csv(file_name_1, file_name_2, env, env_1, is_excel_output):
         file_name_v1 = file_name_1
         file_name_v2 = file_name_2
 
-        print("LHS----------->")
-        # Read the file 1 csv file
-        older_version_file = pd.read_csv(file_name_v1)
-        print(older_version_file)
-        #older_version_file = older_version_file.drop(['lastmodified'], axis=1)
-        # created_by', 'batch_id', 'created_dt
+        if(file_format == "csv"):
 
-        print("RHS----------->")
-        # Read the file 2 csv file
-        latest_version_file = pd.read_csv(file_name_v2)
-        print(latest_version_file)
+            print("LHS----------->")
+            # Read the file 1 csv file
+            older_version_file = pd.read_csv(file_name_v1)
+            print(older_version_file)
 
-        #latest_version_file = latest_version_file.drop(['lastmodified'], axis=1)
+            print("RHS----------->")
+            # Read the file 2 csv file
+            latest_version_file = pd.read_csv(file_name_v2)
+            print(latest_version_file)
+
+        else:
+            print("LHS----------->")
+            # Read the file 1 csv file
+            older_version_file = pd.read_excel(file_name_v1)
+            print(older_version_file)
+
+            print("RHS----------->")
+            # Read the file 2 csv file
+            latest_version_file = pd.read_excel(file_name_v2)
+            print(latest_version_file)
+
 
         file_name_1 = split_version_file(file_name_v1)
         file_name_2 = split_version_file(file_name_v2)

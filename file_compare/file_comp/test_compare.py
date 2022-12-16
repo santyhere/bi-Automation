@@ -88,7 +88,14 @@ def test_compare_files():
                 file.write("<tr>")
                 file.write("<td>" + lhs_file_name + "</td>")
                 file.write("<td>" + rhs_file_name + "</td>")
-                result_msg = fic.validate_csv(lhs_file_name, rhs_file_name, env, env_1, is_excel_output_needed)
+
+                if (lhs_file_name.endswith(".csv")):
+                    result_msg = fic.validate_files("csv",lhs_file_name, rhs_file_name, env, env_1, is_excel_output_needed)
+                elif (lhs_file_name.endswith(".xlsx")):
+                    result_msg = fic.validate_files("xlsx",lhs_file_name, rhs_file_name, env, env_1, is_excel_output_needed)
+                else :
+                    result_msg = "Older excel(xls) format not supported"
+                    #result_msg = fic.validate_files("xlsx",lhs_file_name, rhs_file_name, env, env_1, is_excel_output_needed)
 
                 file.write("<td>" + result_msg  + "</td>")
                 file.write("</tr>")
@@ -97,7 +104,7 @@ def test_compare_files():
         file.write("<br>")
         file.write("<table border=1 >")
         file.write("<tr>")
-        file.write("<th> File_details</th>")
+        file.write("<th> Extra file_details LHS</th>")
         file.write("<th> Result </th>")
         file.write("</tr>")
 
@@ -118,7 +125,7 @@ def test_compare_files():
 
         file.write("<table border=1 >")
         file.write("<tr>")
-        file.write("<th> File_details</th>")
+        file.write("<th> Extra file_details RHS</th>")
         file.write("<th> Result </th>")
         file.write("</tr>")
 

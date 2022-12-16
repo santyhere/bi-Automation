@@ -1,0 +1,108 @@
+#!/home/ec2-user/automation/file_compare/file_comp/autovenv/bin/python3
+'''
+    Copyright (c) 2017 Timothy Savannah All Rights Reserved
+
+    Licensed under terms of LGPLv3.
+'''
+
+import os
+import sys
+
+from json_to_csv import JsonToCsv, FormatStrParseError
+
+from json_to_csv.help import FORMAT_HELP
+
+
+def printUsage():
+    sys.stderr.write('Usage: %s [format str]\n' %(os.path.basename(sys.argv[0])))
+    sys.stderr.write('''  Formats a json string ( delivered via stdin ) to csv, based on provided format str.
+    
+    Options:
+
+      --null-value=XXX          Use "XXX" instead of an empty string as the null value
+
+      --quote-fields=X          Defaults to "Smart quoting", i.e. fields will be quoted
+                                  according to RFC 4180 as-needed. You can specify "true" or "false"
+                                  here explicitly to force a behaviour
+
+      --help                    Show this message
+      --format-help             Show usage on format string representation
+
+      --version                 Print the version
+
+Example:
+
+   cat myFile.json | jsonToCsv '+"Results"["name", "org"]'
+
+''')
+    
+
+if __name__ == '__main__':
+
+    args = sys.argv[1:]
+
+    isDebug = False
+
+    nullValue = ''
+
+    quoteFields = 'smart'
+
+
+    # Parse the args
+    for arg in args:
+        if arg.startswith('--null-value='):
+            nullValue = arg[len('--null-value='):]
+            args.remove(arg)
+        elif arg.startswith('--quote-fields='):
+            quoteFields = arg[len('--quote-fields='):].lower()
+            args.remove(arg)
+
+            if quoteFields == 'smart':
+                pass
+            elif quoteFields in ('1', 'on', 'true', 'yes'):
+                quoteFields = True
+            elif quoteFields in ('0', 'off', 'false', 'no'):
+                quoteFields = False
+            else:
+                sys.stderr.write('Unknown value for "quote-fields": %s.\n  Try "yes", "no", or "smart"\n' %(quoteFields, ))
+                sys.exit(1)
+
+        elif arg == '--debug':
+            isDebug = True
+            args.remove('--debug')
+        elif arg == '--help':
+            printUsage()
+            sys.exit(2)
+        elif arg == '--format-help':
+            sys.stderr.write(FORMAT_HELP)
+            sys.exit(2)
+        elif arg == '--version':
+            from json_to_csv import __version__ as jsonToCsvVersion
+            print ( '\njson to csv version %s by Timothy Savannah\n' %(jsonToCsvVersion,))
+            sys.exit(2)
+
+    if not args:
+        sys.stderr.write('Missing format str.\n\n')
+        printUsage()
+        sys.exit(1)
+
+    # Join any remaining args with a space
+    parseStr = ' '.join(args)
+
+    # Try to parse format string
+    try:
+        parser = JsonToCsv(parseStr, nullValue=nullValue, debug=isDebug)
+    except FormatStrParseError as pe:
+        # Got a readable error, print it.
+        sys.stderr.write('Error in format str: %s\n' %(str(pe),))
+        sys.exit(1)
+
+    # Read data from stdin
+    contents = sys.stdin.read()
+
+    # Parse that data, and print the csv string
+    try:
+        print ( parser.convertToCsv(contents, quoteFields=quoteFields) )
+    except FormatStrParseError as pe:
+        sys.stderr.write('Error in parsing: %s\n' %(str(pe),))
+        sys.exit(1)

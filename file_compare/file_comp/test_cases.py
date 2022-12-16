@@ -1,5 +1,5 @@
-from car_comp import file_compare as fic
-from car_comp import folder_compare as foc
+from file_comp import file_compare as fic
+from file_comp import folder_compare as foc
 import pytest
 import datetime
 import os
